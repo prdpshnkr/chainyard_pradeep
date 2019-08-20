@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { BrowserRouter, Route, Switch, NavLink } from 'react-router-dom'
 import SingleBlock from './containers/Block/SingleBlock'
 import './App.css';

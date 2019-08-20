@@ -5,7 +5,7 @@ const LastBlock = () => {
 
   const [blockIndex, setBlockIndex] = useState()
   const [blockHeight, setBlockHeight] = useState()
-  const [blockReceived_time, setBlockTime] = useState()
+  const [blockTime, setBlockTime] = useState(0)
 
   useEffect(() => {
     axios.get(`https://blockchain.info/latestblock`, {
@@ -26,7 +26,7 @@ const LastBlock = () => {
     <div>
       < p > Block Index: {blockIndex}</p >
       < p > Block Height: {blockHeight}</p >
-      < p > Block Time: {blockReceived_time}</p >
+      < p > Block Time: {blockTime.toString()}</p >
     </div>
   )
 }
