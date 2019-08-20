@@ -6,6 +6,7 @@ const LastBlock = () => {
   const [blockIndex, setBlockIndex] = useState()
   const [blockHeight, setBlockHeight] = useState()
   const [blockTime, setBlockTime] = useState(0)
+  const [blockTxIndexes, setBlockTxIndexes] = useState([])
 
   useEffect(() => {
     axios.get(`https://blockchain.info/latestblock`, {
@@ -18,7 +19,7 @@ const LastBlock = () => {
         setBlockIndex(response.data.block_index)
         setBlockHeight(response.data.height)
         setBlockTime(response.data.time)
-
+        setBlockTxIndexes(response.data.txIndexes)
       })
   })
 
@@ -27,6 +28,24 @@ const LastBlock = () => {
       < p > Block Index: {blockIndex}</p >
       < p > Block Height: {blockHeight}</p >
       < p > Block Time: {blockTime.toString()}</p >
+      <table border="1" className="table">
+        <thead className="thead-dark">
+          <tr>
+
+            <th scope="col">Transaction Indexes</th>
+          </tr>
+        </thead>
+        <tbody>
+          {blockTxIndexes.map(block => {
+            return (
+              <tr>
+
+                <td>{block}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }

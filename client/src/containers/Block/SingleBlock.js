@@ -9,6 +9,7 @@ const SingleBlock = (props) => {
   const [blockNext_block, setBlockNext_block] = useState()
   const [blockPrev_block, setBlockPrev_block] = useState()
   const [blockReceived_time, setBlockReceived_time] = useState()
+  const [blockTx, setBlockTx] = useState([])
 
   useEffect(() => {
     axios.get(`https://blockchain.info/rawblock/0000000000000bae09a7a393a8acded75aa67e46cb81f7acaa5ad94f9eacd103`, {
@@ -24,7 +25,7 @@ const SingleBlock = (props) => {
         setBlockNext_block(response.data.next_block)
         setBlockPrev_block(response.data.prev_block)
         setBlockReceived_time(response.data.received_time)
-
+        setBlockTx(response.data.tx)
       })
   })
 
@@ -36,6 +37,24 @@ const SingleBlock = (props) => {
       < p > Next Block: {blockNext_block}</p >
       < p > Prev Block: {blockPrev_block}</p >
       < p > Block Time: {blockReceived_time}</p >
+      <table border="1" className="table">
+        <thead className="thead-dark">
+          <tr>
+
+            <th scope="col">Transactions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {blockTx.map(block => {
+            return (
+              <tr>
+
+                <td>{block.tx_index}</td>
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
     </div>
   )
 }
